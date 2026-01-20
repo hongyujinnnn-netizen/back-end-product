@@ -1,12 +1,12 @@
 package com.example.demo.model;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import lombok.Data;
+import com.sun.istack.NotNull;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Table;
+import org.springframework.data.annotation.Id;
 
-@Data
 @Entity
 @Table(name = "products")
 public class Product {
@@ -29,7 +29,5 @@ public class Product {
     @Min(value = 0, message = "Quantity must be >= 0")
     private Integer qty;
 
-    @Column(name = "is_deleted")
     private boolean deleted = false;
-
 }

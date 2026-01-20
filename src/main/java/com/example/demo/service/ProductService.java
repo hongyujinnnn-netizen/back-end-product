@@ -22,7 +22,7 @@ public class ProductService {
         return productRepository.save(product);
     }
 
-    public Product update(Long id, Product newProduct) {
+    public Product updateProduct(Long id, Product newProduct) {
         Product product = productRepository.findById(String.valueOf(id))
                 .orElseThrow(() -> new RuntimeException("Product not found"));
 
@@ -31,6 +31,19 @@ public class ProductService {
         product.setPrice(newProduct.getPrice());
         product.setQty(newProduct.getQty());
 
+        return productRepository.save(product);
+    }
+
+    public void softDeleteProduct(Long id) {
+        Product product = productRepository.findById(String.valueOf(id))
+                .orElseThrow(() -> new RuntimeException("Product not found"));
+
+        product.setDeleted(true);
+        productRepository.save(product);
+    }
+
+    public Product createProduct(Product product) {
+        product.setDeleted(false);
         return productRepository.save(product);
     }
 }
